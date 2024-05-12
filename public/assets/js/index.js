@@ -72,15 +72,32 @@ const renderActiveNote = () => {
   }
 };
 
-const handleNoteSave = () => {
+const handleNoteSave = async () => {
   const newNote = {
     title: noteTitle.value,
     text: noteText.value
   };
-  saveNote(newNote).then(() => {
-    getAndRenderNotes();
-    renderActiveNote();
-  });
+
+  try {
+    // Send a POST request to /api/notes with the new note data
+    const response = await saveNote(newNote);
+
+    // Check for successful response
+    if (!response.ok) {
+      throw new Error(`Error saving note: ${response.statusText}`); // Handle errors
+    }
+
+    // Get the newly created note data
+    const savedNote = await response.json();
+
+    // Update the UI with the saved note
+    getAndRenderNotes(); // Re-render the note list including the saved note
+    renderActiveNote(); // Reset the active note and form state
+
+  } catch (error) {
+    console.error('Error saving note:', error);
+    // Handle errors appropriately, like displaying an error message to the user
+  }
 };
 
 // Delete the clicked note
@@ -111,7 +128,10 @@ const handleNoteView = (e) => {
 // Sets the activeNote to and empty object and allows the user to enter a new note
 const handleNewNoteView = (e) => {
   activeNote = {};
-  show(clearBtn);
+  noteTitle.value = ''; // Clear title field
+  noteText.value = ''; // Clear text field
+  show(clearBtn); // Show the "Clear Form" button
+  hide(saveNoteBtn); // Hide the "Save Note" button
   renderActiveNote();
 };
 
@@ -124,6 +144,12 @@ const handleRenderBtns = () => {
     hide(saveNoteBtn);
   } else {
     show(saveNoteBtn);
+  }
+  // If there's an active note (selected from the list) show "New Note" button
+  if (activeNote.id) {
+    show(newNoteBtn);
+  } else {
+    hide(newNoteBtn);
   }
 };
 
