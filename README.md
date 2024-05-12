@@ -1,7 +1,15 @@
 # C11_NoteTaker
-## Note taker application used to write and save notes.
+## License
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit)
+This project is licensed under the MIT license. You can view the license [here](https://opensource.org/licenses/mit).
+## Table of Contents
+* [Description](#description)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Questions](#questions)
 
-This application will use an Express.js back end and will save and retrieve note data from a JSON file.
+## Description
+Note Taker application used to write and save notes. This application will use an Express.js back end and will save and retrieve note data from a JSON file.
 
 ### Installation
 
@@ -10,12 +18,11 @@ This application will use an Express.js back end and will save and retrieve note
 
 ### Usage
 
-1. Run the application: `node server.js`
-2. Foll
-3. The 
+1. Navigate to [Note Taker] (https://c11-notetaker.onrender.com)
+2. Click on the Get Started link
 
-### Walkthrough Video
-
-[Link to your walkthrough video demonstrating the application] (https://drive.google.com/file/d/1stcM4PN7OzaONoxcgt9ML8Q4lA3Yt4y0/view?usp=drive_link)
+## Questions
+* GitHub: [egarza0614](https://github.com/egarza0614)
+* Email: eloygarza3@gmail.com (Feel free to contact me with additional questions.)
 
 

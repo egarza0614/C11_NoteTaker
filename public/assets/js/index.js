@@ -58,17 +58,13 @@ const renderActiveNote = () => {
   hide(clearBtn);
 
   if (activeNote.id) {
-    show(newNoteBtn);
-    noteTitle.setAttribute('readonly', true);
-    noteText.setAttribute('readonly', true);
-    noteTitle.value = activeNote.title;
-    noteText.value = activeNote.text;
+    show(newNoteBtn); // Show "New Note" button if an active note is selected
+    noteTitle.setAttribute('readonly', true); // Make title readonly for editing
+    noteText.setAttribute('readonly', true); // Make text area readonly for editing
   } else {
-    hide(newNoteBtn);
-    noteTitle.removeAttribute('readonly');
-    noteText.removeAttribute('readonly');
-    noteTitle.value = '';
-    noteText.value = '';
+    hide(newNoteBtn); // Hide "New Note" button if no active note
+    noteTitle.removeAttribute('readonly'); // Allow editing title
+    noteText.removeAttribute('readonly'); // Allow editing text area
   }
 };
 
@@ -77,27 +73,10 @@ const handleNoteSave = async () => {
     title: noteTitle.value,
     text: noteText.value
   };
-
-  try {
-    // Send a POST request to /api/notes with the new note data
-    const response = await saveNote(newNote);
-
-    // Check for successful response
-    if (!response.ok) {
-      throw new Error(`Error saving note: ${response.statusText}`); // Handle errors
-    }
-
-    // Get the newly created note data
-    const savedNote = await response.json();
-
-    // Update the UI with the saved note
-    getAndRenderNotes(); // Re-render the note list including the saved note
-    renderActiveNote(); // Reset the active note and form state
-
-  } catch (error) {
-    console.error('Error saving note:', error);
-    // Handle errors appropriately, like displaying an error message to the user
-  }
+  saveNote(newNote).then(() => {
+    getAndRenderNotes();
+    renderActiveNote();
+  });
 };
 
 // Delete the clicked note
@@ -121,7 +100,14 @@ const handleNoteDelete = (e) => {
 // Sets the activeNote and displays it
 const handleNoteView = (e) => {
   e.preventDefault();
-  activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
+  const clickedElement = e.target;
+  const noteDataString = clickedElement.parentElement.dataset.note;
+  const noteData = JSON.parse(noteDataString);
+
+  activeNote = noteData;
+  noteTitle.value = activeNote.title;
+  noteText.value = activeNote.text;
+  
   renderActiveNote();
 };
 
