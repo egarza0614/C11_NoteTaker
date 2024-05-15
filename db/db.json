@@ -1,34 +1,32 @@
 [
     {
         "title": "Test Title",
-        "text": "Test text"
+        "text": "Test text",
+        "id": "732b4b35-8768-4488-9254-8c5c01b444d0"
     },
     {
         "title": "sample",
-        "text": "1:47pm"
+        "text": "1:47pm",
+        "id": "0d5fac23-61fd-4cf9-8ab3-e9fc365c83d8"
     },
     {
         "title": "Sample 2",
-        "text": "entry made at 220pm"
-    },
-    {
-        "title": "Sample 2",
-        "text": "entry made at 220pm. Edited."
+        "text": "entry made at 220pm",
+        "id": "244fd415-b273-4ef8-ae91-0a3d053ef2d9"
     },
     {
         "title": "Sample 3",
-        "text": "entry made at 220pm. Edited at 3:11PM"
-    },
-    {
-        "title": "Sample 3",
-        "text": "entry made at 220pm. Edited at 338pm."
+        "text": "entry made at 220pm. Edited at 3:11PM",
+        "id": "15aa2017-d677-40f7-a459-b046beaeddc6"
     },
     {
         "title": "Sample 4",
-        "text": "entry made at 220pm. Edited at 338pm."
+        "text": "entry made at 220pm. Edited at 338pm.",
+        "id": "c98a979f-c948-4486-9fe8-960464845d4c"
     },
     {
         "title": "Sample 5",
-        "text": "entry made at 220pm. Edited at 339pm."
+        "text": "entry made at 220pm. Edited at 339pm.",
+        "id": "a3e667e0-3c2e-4215-8987-3f7934089453"
     }
 ]

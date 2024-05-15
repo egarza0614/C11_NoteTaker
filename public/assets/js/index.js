@@ -56,15 +56,22 @@ const deleteNote = (id) =>
 const renderActiveNote = () => {
   hide(saveNoteBtn);
   hide(clearBtn);
-
+  console.log("renderActiveNote triggered:");
+  console.log("activeNote.id:", activeNote.id);
   if (activeNote.id) {
     show(newNoteBtn); // Show "New Note" button if an active note is selected
     noteTitle.setAttribute('readonly', true); // Make title readonly for editing
     noteText.setAttribute('readonly', true); // Make text area readonly for editing
+    noteTitle.value = activeNote.title; 
+    noteText.value = activeNote.text;
+    console.log("noteTitle.value:", noteTitle.value);
+    console.log("noteText.value:", noteText.value);
   } else {
     hide(newNoteBtn); // Hide "New Note" button if no active note
     noteTitle.removeAttribute('readonly'); // Allow editing title
     noteText.removeAttribute('readonly'); // Allow editing text area
+    noteTitle.value = '';
+    noteText.value = '';
   }
 };
 
@@ -100,24 +107,17 @@ const handleNoteDelete = (e) => {
 // Sets the activeNote and displays it
 const handleNoteView = (e) => {
   e.preventDefault();
-  const clickedElement = e.target;
-  const noteDataString = clickedElement.parentElement.dataset.note;
-  const noteData = JSON.parse(noteDataString);
-
-  activeNote = noteData;
-  noteTitle.value = activeNote.title;
-  noteText.value = activeNote.text;
-  
+  e.stopPropagation();
+  activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
+  console.log("handleNoteView triggered:");
+  console.log("activeNote:", activeNote);
   renderActiveNote();
 };
 
 // Sets the activeNote to and empty object and allows the user to enter a new note
 const handleNewNoteView = (e) => {
   activeNote = {};
-  noteTitle.value = ''; // Clear title field
-  noteText.value = ''; // Clear text field
-  show(clearBtn); // Show the "Clear Form" button
-  hide(saveNoteBtn); // Hide the "Save Note" button
+  show(clearBtn);
   renderActiveNote();
 };
 
@@ -130,12 +130,6 @@ const handleRenderBtns = () => {
     hide(saveNoteBtn);
   } else {
     show(saveNoteBtn);
-  }
-  // If there's an active note (selected from the list) show "New Note" button
-  if (activeNote.id) {
-    show(newNoteBtn);
-  } else {
-    hide(newNoteBtn);
   }
 };
 

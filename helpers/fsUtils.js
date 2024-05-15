@@ -1,6 +1,5 @@
 const fs = require('fs');
 const util = require('util');
-const { v4: uuidv4 } = require('uuid'); // Import v4 function from uuid
 
 // Promise version of fs.readFile
 const readFromFile = util.promisify(fs.readFile);
